@@ -1,0 +1,6 @@
+{
+	"10":{"sx":17,"sy":5,"tileW":35,"tileH":48,"frames":1},
+	"11":{"sx":63,"sy":12,"tileW":32,"tileH":40,"frames":1},
+	"12":{"sx":105,"sy":0,"tileW":60,"tileH":60,"frames":1},
+	"13":{"sx":174,"sy":10,"tileW":40,"tileH":48,"frames":1}
+}

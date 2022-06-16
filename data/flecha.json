@@ -1,0 +1,6 @@
+{
+	"flecha1":{"sx":0,"sy":0,"tileW":130,"tileH":120,"frames":1},
+	"flecha2":{"sx":130,"sy":0,"tileW":130,"tileH":120,"frames":1},
+	"flecha3":{"sx":260,"sy":0,"tileW":130,"tileH":120,"frames":1},
+	"flecha4":{"sx":390,"sy":0,"tileW":130,"tileH":120,"frames":1}
+}
