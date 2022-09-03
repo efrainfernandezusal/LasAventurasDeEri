@@ -1,26 +1,20 @@
 var game = function() {
 
-var Q = window.Q = Quintus()
-		.include(["Sprites", "Scenes", "Input", "2D", "UI", "Anim", "TMX", "Audio", "Touch"])
-        .setup("myGame",
-        {
-        	width: 800,
-        	height: 300,
-        	scaleToFit: true	//Para que reescale
-        })
-        .controls().enableSound().touch();
+	var Q = window.Q = Quintus()
+			.include(["Sprites", "Scenes", "Input", "2D", "UI", "Anim", "TMX", "Audio", "Touch"])
+			.setup("myGame",
+			{
+				width: 800,
+				height: 300,
+				maximize: true,
+				scaleToFit: true	//Para que reescale
+			})
+			.controls().enableSound().touch();
+
+			// Para no difuminar los pixeles
+			Q.setImageSmoothing(false);
 
 
-    //Añadir un componente para todos
-	/*
-    Q.component("dancer",{
-    	extend: {
-    		dance: function(){
-    			this.p.angle = 0;
-    			this.animate({angle: 360}, 0.5, Q.Easing.Quadratic.In);
-    		}
-    	}
-    });*/
 //----------------------------------SPRITES---------------------------------------------------//	 
 	//--------------------------------------------------------------//
 	//----------------------------MAIN------------------------------//
@@ -36,8 +30,10 @@ var Q = window.Q = Quintus()
 				frame: 1,
 				scale: 1
 			});
+
 			//Añadimos gravedad y controles básicos
 			this.add("2d, platformerControls, animation, tween");
+
 			//Cuando se de el evento up, se llama a la funcion this
 			Q.input.on("up", this, function(){
 				if(this.p.vy == 0)
@@ -49,11 +45,16 @@ var Q = window.Q = Quintus()
 		},
 	    step: function(dt){
 			//--------------CAMBIO DE MAPAS--------------//
-			if (this.p.x > 1400 && this.stage.scene.name == "mapa1") {
-				Q.stageScene("tutorial1", 1);
+
+			// Entrada al nivel de secuenciacion 
+			if (this.p.x > 800  && this.stage.scene.name == "mapa1") {
+				this.stage.add("viewport").follow(main,{x:false, y:false});
+				if(this.p.x > 1400){
+					Q.stageScene("tutorial1", 1);
+				}
 			}
 
-			// Para entrar al bosque
+			// Entrada al nivel de modulacion
 			if (this.p.x > 800 && this.stage.scene.name == "mapa2") {
 				this.stage.add("viewport").follow(main,{x:false, y:false});
 				if(this.p.x > 1400){
@@ -71,7 +72,8 @@ var Q = window.Q = Quintus()
 				button = new Q.UI.Button({x: Q.width/2, y: Q.height/2, w: 605, h: 259, scale: 1, asset: "controles__tutorialbarra.png"});
 				stage.insert(button);
 			}*/
-			// Para entrar en la puerta
+
+			// Entrada al nivel de similitud de patrones
 			if (this.p.x > 1350 && this.p.x < 1400 &&this.stage.scene.name == "mapa3" && Q.inputs["fire"]) {
 				Q.audio.play("puerta.mp3");
 				setTimeout(function(){
@@ -80,36 +82,35 @@ var Q = window.Q = Quintus()
 			}
 
 			//------------Animación del personaje-------------//
-	    	if(this.p.vx > 0){	//Si se mueve a la derecha
-	    		this.play("walk_right");
-	    	}else if(this.p.vx < 0){
-	    		this.play("walk_left");
-	    	}
+			if(this.p.vx > 0){	//Si se mueve a la derecha
+				this.play("walk_right");
+			}else if(this.p.vx < 0){
+				this.play("walk_left");
+			}
 			
-			//Animacion de main caminando hacia delante
-			
+			// Animacion de main caminando hacia delante
 			if(Q.inputs["fire"]){
 				this.play("move");
 			}
 
-	    	//Animacion de main saltando
-	    	if(this.p.vy < 0){	//Si salta
-	    		if(this.p.vx > 0){	//Si se mueve a la derecha
-	    			this.play("jump_right");
-	    		}else if(this.p.vx < 0){
-	    			this.play("jump_left");
-	    		}
-	    	}
+			// Animacion de main saltando
+			if(this.p.vy < 0){	//Si salta
+				if(this.p.vx > 0){	//Si se mueve a la derecha
+					this.play("jump_right");
+				}else if(this.p.vx < 0){
+					this.play("jump_left");
+				}
+			}
 
-	    	//Animacion de main cayendo
-	    	if(this.p.vy > 0){	//Si salta
-	    		if(this.p.vx > 0){	//Si se mueve a la derecha
-	    			this.play("fall_right");
-	    		}else if(this.p.vx < 0){
-	    			this.play("fall_left");
-	    		}
-	    	}
-	    }
+			// Animacion de main cayendo
+			if(this.p.vy > 0){	//Si salta
+				if(this.p.vx > 0){	//Si se mueve a la derecha
+					this.play("fall_right");
+				}else if(this.p.vx < 0){
+					this.play("fall_left");
+				}
+			}
+		}
 	});
 
 	
@@ -128,12 +129,9 @@ var Q = window.Q = Quintus()
 			});
 		
 			//Añadimos gravedad y controles básicos
-			this.add("2d, aiBounce, animation");		//Le añadimos vida propia de goomba
+			this.add("2d, aiBounce, animation");
 			this.on("bump.left", this, "find");	
 			this.on("bump.right", this, "find");	
-			//this.on("bump.botton, bump.left, bump.right", this, "kill");
-		
-			//El obj es para tener el objeto con el que colisiona (siempre que utilicemos bump)
 
 		},
 		step(dt){
@@ -418,83 +416,10 @@ var Q = window.Q = Quintus()
 		}
 	});
 
-	/*
-	Q.Sprite.extend("OneUp", {
-	    init: function(p) {
-	     	this._super(p,{
-	        	asset: "1up.png",
-	        	scale: 1,
-	     		x: 20,
-	     		y: -10,
-	     		sensor: true,		//Para que mario atraviese la setilla
-	     		taken: false		//Para que no haga tantas colisiones como fps haya
-	      	});
-	      	this.on("sensor", this, "hit");	//Llama a hit de este objeto
-	      	this.add("tween");	//Importante para el comportamiento animate -> Añadimos mediante componentes
-	    },
-	    hit: function(collision){
-	    	if(this.taken) return;		//Si ya está cogida sale
-
-	    	if(!collision.isA("Mario"))		return;	//Para que solo colisione con Mario
-	    	
-	    	this.taken = true;
-			Q.state.get("vidas");
-	    	Q.state.inc("vidas",1);
-	    	console.log(Q.state.get("vidas"));
-	    	collision.p.vy = -400;
-
-	    	//Desaparece la seta
-	    	
-	    	this.animate({y: this.p.y-100, angle: 360},
-	    				 1, 
-	    				 Q.Easing.Quadratic.InOut,
-	    				 {callback: function(){
-						  	this.destroy();
-	    				 }});
-	    }
-	   
-	});
-
-
-	Q.Sprite.extend("Goomba", {
-	    
-	    init: function(p) {
-	    	this._super(p,{
-	        	sheet: "goomba",
-	        	x: 400+(Math.random()*200),
-	        	y: 250,
-	        	frame: 0,
-	        	vx: 200		//velocidad de goomba
-	      	});
-	    
-	    	//Añadimos gravedad y controles básicos
-	      	this.add("2d, aiBounce, animation");		//Le añadimos vida propia de goomba
-	      	this.on("bump.top", this, "onTop");	//Si da por arriba, llamamos al onTop de esta clase
-	      	this.on("bump.botton, bump.left, bump.right", this, "kill");
-	      
-	      	//El obj es para tener el objeto con el que colisiona (siempre que utilicemos bump)
-
-	    },
-	    onTop: function(collision){
-	    	if(!collision.obj.isA("Caja"))		return;	//Para que solo colisione con Caja
-	    	collision.obj.p.vy = -400;
-	    	console.log("fruta dies");
-	    	this.destroy();
-	    	Q.audio.play("kill_enemy.mp3");
-	    },
-	    kill: function(collision){
-	    	if(!collision.obj.isA("Mario"))		return;	//Para que solo colisione con Mario
-
-	    	collision.obj.p.vy = -200;
-	    	collision.obj.p.vx = collision.normalX += 600;
-	    	collision.obj.p.vx +=collision.normalX += 5;
-	    	collision.obj.die();
-	    }
-	  });*/
-
 //--------------------------------CARGA DE ELEMENTOS-------------------------------------------//	 
-	Q.load(["barra_puerta.png", "win.png", "titulo.png", "endGame.png", "mon.png", "mon.json", "soundtrack_sequence.mp3", "soundtrack_portada.mp3", "soundtrack_mapa123.mp3", "soundtrack_mapa4.mp3", "soundtrack_frutas.mp3", "soundtrack_copy.mp3", "boton.mp3", "fruta.mp3", "salto.mp3", "pasos.mp3", "puerta.mp3", "controles__tutorialbarra.png", "tutorial__0.png", "tutorial__1.png", "tutorial__2.png", "tutorial__3.png", "controles__tutorial1.png", "controles__tutorial2.png", "controles__tutorial3.png", "controles__tutorialbarra.png", "arbol.png", "arbol.json", "puerta.png", "puerta.json", "background_copy.png", "map_copy.tmx", "background_fruit.png", "map_fruit.tmx", "mapa2.tmx", "mapa3.tmx", "mapa4.tmx", "degradado1.png", "degradado3.png","degradado4.png","degradado5.png", "tiles.tsx", "tiles.png", "mapa1.tmx", "suelo.json", "suelo.png", "frutas_selected.json", "frutas_selected.png", "passed.png", "cubo_solution.png", "comprobar.png", "cubo2.png", "cubo2.json", "cubo1.png", "cubo1.json", "main2.png", "main2.json", "flecha.png", "flecha.json", "cube2.png", "cube2.json", "cube1.png", "cube1.json", "fondo_piedra.png", "sequence.tmx", "frutas.png", "frutas.json", "baraja.png", "cartas.json", "caja.json", "caja.png", "fichas.png", "cartas.tmx", "bosque_extended.png", "frutas.tmx", "main.json", "main.png", "title-screen.png"], function() {
+	Q.load(["barra_puerta.png", "win.png", "titulo.png", "endGame.png", "mon.png", "mon.json", "soundtrack_sequence.mp3", "soundtrack_portada.mp3", "soundtrack_mapa123.mp3", "soundtrack_mapa4.mp3", "soundtrack_frutas.mp3", "soundtrack_copy.mp3", "boton.mp3", "fruta.mp3", "salto.mp3", "pasos.mp3", "puerta.mp3", "controles__tutorialbarra.png", "tutorial__0.png", "tutorial__1.png", "tutorial__2.png", "tutorial__3.png", "controles__tutorial1.png", "controles__tutorial2.png", "controles__tutorial3.png", "controles__tutorialbarra.png", "arbol.png", "arbol.json", "puerta.png", "puerta.json", "background_copy.png", "map_copy.tmx", "background_fruit.png", "map_fruit.tmx", "mapa2.tmx", "mapa3.tmx", "mapa4.tmx", "degradado1.png", "degradado3.png","degradado4.png","degradado5.png", "tiles.tsx", "tiles.png", "mapa1.tmx", "suelo.json", "suelo.png", "frutas_selected.json", "frutas_selected.png", "passed.png", "cubo_solution.png", "comprobar.png", "cubo2.png", "cubo2.json", "cubo1.png", "cubo1.json", "main2.png", "main2.json", "flecha.png", "flecha.json", "cube2.png", "cube2.json", "cube1.png", "cube1.json", "sequence.tmx", "frutas.png", "frutas.json", "caja.json", "caja.png", "bosque_extended.png", "main.json", "main.png"], function() {
 	 
+		// Compilación de las imágenes con sus correspondientes JSON
 		Q.compileSheets("main.png","main.json");
 		Q.compileSheets("frutas_selected.png","frutas_selected.json");
 		Q.compileSheets("flecha.png","flecha.json");
@@ -509,8 +434,6 @@ var Q = window.Q = Quintus()
 		Q.compileSheets("cubo2.png","cubo2.json");
 		Q.compileSheets("caja.png","caja.json");
 		Q.compileSheets("frutas.png","frutas.json");
-		Q.compileSheets("baraja.png","cartas.json");
-		Q.compileSheets("goomba.png","goomba.json");
 
 		Q.animations("main_anim",{
 			walk_right: {frames: [4,5,6], rate: 1/6, next: "parado_r"},
@@ -554,11 +477,6 @@ var Q = window.Q = Quintus()
 			stage.add("viewport").follow(main,{x:true, y:false});
 			stage.viewport.scale = 1;
 			stage.viewport.offsetX = -200;
-
-			/*
-			stage.on("destroy",function() {
-				mario.destroy();
-			});*/
 
 			//Iniciamos variables globales
 			//Q.state.reset({"vidas": 2});
@@ -1343,30 +1261,39 @@ var Q = window.Q = Quintus()
 			})
 		});
 		
-	   	//Creamos la escena principal
-	   	Q.scene("mainTitle", function(stage){
+		//Creamos la escena principal
+		Q.scene("mainTitle", function(stage){
 			// Iniciamos las variables globales de contadores
 			Q.state.reset({ vidas: 3,  frutas: 0});
 
 			// Creamos el botón de inicio
-	   		var button = new Q.UI.Button({
-	   			x: Q.width/2,
-	   			y: Q.height/2,
-	   			w: 800, 
-	   			h: 300,
+			var button = new Q.UI.Button({
+				x: Q.width/2,
+				y: Q.height/2,
+				w: 800, 
+				h: 300,
 				scale: 1.01,
-	   			asset: "titulo.png"
-	   		});
-	   		stage.insert(button);
+				asset: "titulo.png"
+			});
+			stage.insert(button);
+
+			// PARA QUE SEA COMPATIBLE CON MOBILE
+			/*
+			addEventListener("keydown", function(){
+				Q.clearStages();
+				
+				Q.stageScene("tutorial0", 1);
+				Q.stageScene("hud", 2);
+			});*/
 
 			// Creamos el inicio
-	   		button.on("click", function(){
-	   			Q.clearStages();
+			button.on("click", function(){
+				Q.clearStages();
 				
-	   			Q.stageScene("tutorial0", 1);
-	   			Q.stageScene("hud", 2);
-	   		});
-	   	});
+				Q.stageScene("tutorial0", 1);
+				Q.stageScene("hud", 2);
+			});
+		});
 
 	   	Q.scene('endGame',function(stage) {
 			var button2 = new Q.UI.Button({x: Q.width/2, y: Q.height/2, w: 605, h: 259, scale: 1, asset: "endGame.png"});

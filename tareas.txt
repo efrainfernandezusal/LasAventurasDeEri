@@ -17,7 +17,7 @@ hecho 3.- Nivel de secuencia
 	hecho -> Al finalizar, que no se deje pintar nada
 
 
-3.- Importante la estructura de TFG
+hecho 3.- Importante la estructura de TFG
 hecho 4.- Añadir a PAULA SANTOS a las respuestas
 5.- Añadir agradecimientos
 No face falta 6.- Hacer requisitos funcionales y no funcionales STEM
@@ -27,7 +27,7 @@ hecho 8.- Minecraft cajas
 hecho Crear mundo principal + historia
 10.- Parar mundo si la pestaña no esta seleccionada en chrome
 
-11.- Aspectos relevantes: Gestión de imágenes y copyright
+hecho 11.- Aspectos relevantes: Gestión de imágenes y copyright
 hecho 12.- Poner un dibujo de los controles a usar
 hecho 13.- Meter la musica
 hecho 14.- Meter vida de perder en los niveles
@@ -37,12 +37,12 @@ hecho 16.- Meter info barra espaciadora
 	hecho -> Queda añadir sistema de vidas y ponerle unas letras blancas
 	hecho -> Queda arreglar bug
 17.- Meter un segundo nivel
-18.- ASPECTOS RELEVANTES: La creación del arte del videojuego -> explicar como hacer el videojuego sin ser de bellas artes
-			-> dificil encontrar assets y fondos sin copyright
+hecho 18.- ASPECTOS RELEVANTES: La creación del arte del videojuego -> explicar como hacer el videojuego sin ser de bellas artes
+			hecho -> dificil encontrar assets y fondos sin copyright
 
-			-> Como incorporar la música al código
-			-> Dificultad de crear las pruebas -> con fragmento de código
-			-> Haber utilizado la API Quintus para el desarrollo del juego (recordar lo dificil que me pareció en la asignatura)
+			hecho -> Como incorporar la música al código
+			hecho -> Dificultad de crear las pruebas -> con fragmento de código
+			hecho -> Haber utilizado la API Quintus para el desarrollo del juego (recordar lo dificil que me pareció en la asignatura)
 Anexos
 19.- Desplegar en gitpages
 20.- Manual de usuario
@@ -51,7 +51,7 @@ Anexos
 22.- Hacer la memoria primero y luego desplegar y poner enlace -> https://www.youtube.com/watch?v=qS_JpO2Zhno
 23.- Desplegar y pasar a andrea
 hecho 24.- Animar a Mon
-25.- Meter caras que no existen
+hecho 25.- Meter caras que no existen
 26.- Quitar console.log
 hecho 27.- Controlar los fallos de listener
 hecho 28.- CREAR PORTADA HORIZONTAL Y VERTICAL
