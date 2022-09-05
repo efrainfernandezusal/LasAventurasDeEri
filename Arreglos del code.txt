@@ -12,11 +12,11 @@ MAS O MENOS -> Métele fondo negro al body o generas una imagen de fondo que sea
 hecho -> La pantalla con la historia de Eri y Mon sale “vidas: 3” arriba a la izqauierda. No debería salir hasta la siguiente pantalla. 
 	Si encima puedes hacer que cuando sale texto sea fondo negro del body, y que si sale el escenario sea lo que te digo de cielo y tierra, mejor.
 
--> El fondo de la portada, el del título, lo haría negro en vez de rojo o azul con la tierra, para mantener el mismo estilo. 
+hecho -> El fondo de la portada, el del título, lo haría negro en vez de rojo o azul con la tierra, para mantener el mismo estilo. 
 	Las aventuras no está centrado con DE y ERI. El color de las letras, que sea igual que el de Eri, porque estoy segura 
 	que has cogido esos colores por el personaje, pues que sean iguales iguales.
 
--> Sigo diciendo que tienes que duplicar los niveles, mete tres más, más difíciles: 
+hecho -> Sigo diciendo que tienes que duplicar los niveles, mete tres más, más difíciles: 
 	
 	-> el primer reto, 8 movimientos y camino más raro (que tenga que ir hacia la izquierda por ejemplo). 
 	

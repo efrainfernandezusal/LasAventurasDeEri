@@ -75,23 +75,6 @@ var game = function() {
 					this.stage.insert(mon);
 				}
 			}
-			
-			
-			//this.stage.add("viewport").follow(mon,{x:false, y:false});
-			/*
-			if(main.p.x > 1400){
-				Q.stageScene("tutorial5", 1);
-			}*/
-			/*
-			var taken = false;
-			if(this.p.x > 1350 && this.p.x < 1400){
-				if(taken)
-					return;
-				taken = true;
-
-				button = new Q.UI.Button({x: Q.width/2, y: Q.height/2, w: 605, h: 259, scale: 1, asset: "controles__tutorialbarra.png"});
-				stage.insert(button);
-			}*/
 
 			// Entrada al nivel de similitud de patrones
 			if (this.p.x > 1350 && this.p.x < 1400 &&this.stage.scene.name == "mapa3" && Q.inputs["fire"]) {
@@ -231,11 +214,11 @@ var game = function() {
 	//--------------------------------------------------------------//
 	//----------------------------SEQUENCE--------------------------//
 	//--------------------------------------------------------------//
-	Q.Sprite.extend("Cubo1", {
+	Q.Sprite.extend("Cube1", {
 		
 		init: function(p) {
 			this._super(p,{
-				sheet: "cubo1",
+				sheet: "cube1",
 				x: 600,
 				y: 250,
 				frame: 0,
@@ -244,16 +227,16 @@ var game = function() {
 		}
 	});
 
-	Q.Sprite.extend("Cubo2", {
+	Q.Sprite.extend("Cube2", {
 		
 		init: function(p) {
 			this._super(p,{
-				sheet: "cubo2",
+				sheet: "cube2",
 				x: 600,
 				y: 250,
 				frame: 0,
 				scale: 0.75
-			});
+			});	
 		}
 	});
 
@@ -324,6 +307,7 @@ var game = function() {
 			if(collision.obj.isA("Caja")){
 				if(this.taken) return;		//Para solo usar la colisión una vez por objeto
 
+				Q.audio.play("error.mp3");
 				// Decrementamos las vidas
 				Q.state.get("vidas");
 				Q.state.dec("vidas", 1);
@@ -419,11 +403,11 @@ var game = function() {
 	//--------------------------------------------------------------//
 	//----------------------------COPY------------------------------//
 	//--------------------------------------------------------------//
-	Q.Sprite.extend("Cube1", {
+	Q.Sprite.extend("Cubo1", {
 		
 		init: function(p) {
 			this._super(p,{
-				sheet: "cube1",
+				sheet: "cubo1",
 				x: 600,
 				y: 250,
 				frame: 0,
@@ -432,21 +416,22 @@ var game = function() {
 		}
 	});
 
-	Q.Sprite.extend("Cube2", {
+	Q.Sprite.extend("Cubo2", {
 		
 		init: function(p) {
 			this._super(p,{
-				sheet: "cube2",
+				sheet: "cubo2",
 				x: 600,
 				y: 250,
 				frame: 0,
 				scale: 0.75
-			});	
+			});
 		}
 	});
+	
 
 //--------------------------------CARGA DE ELEMENTOS-------------------------------------------//	 
-	Q.load(["barra_puerta.png", "win.png", "titulo.png", "endGame.png", "mon.png", "mon.json", "soundtrack_sequence.mp3", "soundtrack_portada.mp3", "soundtrack_mapa123.mp3", "soundtrack_mapa4.mp3", "soundtrack_frutas.mp3", "soundtrack_copy.mp3", "boton.mp3", "fruta.mp3", "salto.mp3", "pasos.mp3", "puerta.mp3", "controles__tutorialbarra.png", "tutorial__0.png", "tutorial__1.png", "tutorial__2.png", "tutorial__3.png", "tutorial__4.png", "controles__tutorial1.png", "controles__tutorial2.png", "controles__tutorial3.png", "controles__tutorialbarra.png", "arbol.png", "arbol.json", "puerta.png", "puerta.json", "background_copy.png", "map_copy.tmx", "background_fruit.png", "map_fruit.tmx", "mapa2.tmx", "mapa3.tmx", "mapa4.tmx", "degradado1.png", "degradado3.png","degradado4.png","degradado5.png", "tiles.tsx", "tiles.png", "mapa1.tmx", "suelo.json", "suelo.png", "frutas_selected.json", "frutas_selected.png", "passed.png", "cubo_solution.png", "comprobar.png", "cubo2.png", "cubo2.json", "cubo1.png", "cubo1.json", "main2.png", "main2.json", "flecha.png", "flecha.json", "cube2.png", "cube2.json", "cube1.png", "cube1.json", "sequence.tmx", "frutas.png", "frutas.json", "caja.json", "caja.png", "bosque_extended.png", "main.json", "main.png"], function() {
+	Q.load(["error.mp3", "controles__tutorialbarra.png", "win.png", "titulo.png", "endGame.png", "mon.png", "mon.json", "soundtrack_sequence.mp3", "soundtrack_portada.mp3", "soundtrack_mapa123.mp3", "soundtrack_mapa4.mp3", "soundtrack_frutas.mp3", "soundtrack_copy.mp3", "boton.mp3", "fruta.mp3", "salto.mp3", "pasos.mp3", "puerta.mp3", "controles__tutorialbarra.png", "tutorial__0.png", "tutorial__1.png", "tutorial__2.png", "tutorial__3.png", "tutorial__4.png", "controles__tutorial1.png", "controles__tutorial2.png", "controles__tutorial3.png", "controles__tutorialbarra.png", "arbol.png", "arbol.json", "puerta.png", "puerta.json", "background_copy.png", "map_copy.tmx", "background_fruit.png", "map_fruit.tmx", "mapa2.tmx", "mapa3.tmx", "mapa4.tmx", "degradado1.png", "degradado3.png","degradado4.png","degradado5.png", "tiles.tsx", "tiles.png", "mapa1.tmx", "suelo.json", "suelo.png", "frutas_selected.json", "frutas_selected.png", "comprobar.png", "cubo2.png", "cubo2.json", "cubo1.png", "cubo1.json", "main2.png", "main2.json", "flecha.png", "flecha.json", "cube2.png", "cube2.json", "cube1.png", "cube1.json", "sequence.tmx", "frutas.png", "frutas.json", "caja.json", "caja.png", "main.json", "main.png"], function() {
 	 
 		// Compilación de las imágenes con sus correspondientes JSON
 		Q.compileSheets("main.png","main.json");
@@ -509,9 +494,6 @@ var game = function() {
 			stage.viewport.scale = 1;
 			stage.viewport.offsetX = -200;
 
-			//Iniciamos variables globales
-			//Q.state.reset({"vidas": 2});
-
 			//Iniciamos la música
 			Q.audio.stop(); 
 			Q.audio.play("soundtrack_mapa123.mp3", {loop:true});
@@ -542,14 +524,6 @@ var game = function() {
 			stage.viewport.scale = 1;
 			stage.viewport.offsetX = -200;
 
-			/*
-			stage.on("destroy",function() {
-				mario.destroy();
-			});*/
-
-			//Iniciamos variables globales
-			//Q.state.reset({vidas: 2});
-
 			//Iniciamos la música
 			Q.audio.stop(); 
 			Q.audio.play("soundtrack_mapa123.mp3", {loop:true});
@@ -570,11 +544,6 @@ var game = function() {
 			stage.add("viewport").follow(main,{x:true, y:false});
 			stage.viewport.scale = 1;
 			stage.viewport.offsetX = -200;
-
-			/*
-			stage.on("destroy",function() {
-				//mario.destroy();
-			});*/
 
 			//Iniciamos la música
 			Q.audio.stop(); 
@@ -597,10 +566,6 @@ var game = function() {
 			stage.add("viewport").follow(main,{x:true, y:false});
 			stage.viewport.scale = 1;
 			stage.viewport.offsetX = -200;
-
-			stage.on("destroy",function() {
-				//mario.destroy();
-			});
 
 			Q.audio.stop(); 
 			Q.audio.play("soundtrack_mapa4.mp3", {loop:true});
@@ -663,7 +628,7 @@ var game = function() {
 		//--------------------------PUERTA------------------------------//
 		//--------------------------------------------------------------//
 		Q.scene("barra_puerta", function(stage) {
-			button = new Q.UI.Button({x: Q.width/2, y: Q.height/2, w: 605, h: 259, scale: 1, asset: "barra_puerta.png"});
+			button = new Q.UI.Button({x: Q.width/2, y: Q.height/2, w: 605, h: 259, scale: 1, asset: "controles__tutorialbarra.png"});
 			stage.insert(button);
 
 			// Creamos el evento click para el botón
@@ -725,7 +690,7 @@ var game = function() {
 			// Para realizar la secuencia de teclas
 			// Bucle for de 5 iteraciones, cambiando las coordenadas de x
 			// Establecemos un codigo dependiendo de la secuencia, y se comprueba si se cumple ese codigo
-			var counter = 0;
+			var counter;
 
 			// Coordenadas de cada punto del tablero (el tablero será una matriz de coordenadas)
 			var coordinates = [];
@@ -738,6 +703,7 @@ var game = function() {
 			// Este codigo se compondrá de un codigo creado según los movimientos de las flechas
 			var code = [];
 			
+			// main_coord será el array que contendrá las coordenadas exactas de la casilla correspondiente
 			var main_coord, main2;
 			
 			// Creamos la variable para el setInterval posterior para reproducir el movimiento
@@ -963,8 +929,6 @@ var game = function() {
 					if(arg){
 						// Si es correcto el movimiento
 						clearInterval(interval_movimiento);
-						var passed = new Q.UI.Button({x: 501, y: 175, w: 240, h: 60, scale: 0.70, asset: "passed.png"});
-						stage.insert(passed);
 
 						setTimeout(function(){ 
 							Q.stageScene("mapa2", 1);
@@ -1004,7 +968,7 @@ var game = function() {
 			// Se elige el nivel en el que se está
 			level = Q.state.get("level");
 			if(level == 1){
-				level =[
+				level_array =[
 					0,0,1,0,
 					0,1,1,0,
 					0,1,0,0,
@@ -1013,7 +977,7 @@ var game = function() {
 				codigo_level = 2232;
 
 			}else if(level == 2){
-				level =[
+				level_array =[
 					0,0,0,0,
 					1,1,1,0,
 					0,0,1,0,
@@ -1026,14 +990,12 @@ var game = function() {
 			var codigo_final = codigo_level;
 
 			inicializacion();
-			imprime_tablero(level);
+			imprime_tablero(level_array);
 			inicio_sequence(coordenada_inicio_level);
 			// Se realiza la secuencia gracias al evento keydown
 
 			// Añadimos una coordenada de fuera
 			coordinates[16] = [750, 175];
-
-			
 		});
 
 		//--------------------------------------------------------------//
@@ -1087,7 +1049,7 @@ var game = function() {
 
 			/*
 			 * Function: random_numer
-			 * Params: array
+			 * Params: min, max
 			 * Usage: Funcion para obtener un numero random entre dos numeros
 			 */
 			function random_numer(min,max){
@@ -1097,7 +1059,7 @@ var game = function() {
 			// Y otra que haga que caigan las frutas que queremos
 			/*
 			 * Function: frutas_caen
-			 * Params: array
+			 * Params: 
 			 * Usage: Funcion generar las frutas aleatorias
 			 */
 			function frutas_caen(){
@@ -1111,7 +1073,7 @@ var game = function() {
 
 			/*
 			 * Function: frutas_selected_caen
-			 * Params: array
+			 * Params: 
 			 * Usage: Funcion generar las frutas aleatorias que deben ser recogidas
 			 */
 			function frutas_selected_caen(){
@@ -1125,7 +1087,7 @@ var game = function() {
 			// Añadimos los setInterval para que las frutas caigan periodicamente
 			
 			// Se elige el nivel en el que se está
-			level = Q.state.get("level");;
+			level = Q.state.get("level");
 			if(level == 1){
 				setInterval(frutas_caen, 1000);
 				setInterval(frutas_selected_caen, 3000);
@@ -1158,7 +1120,7 @@ var game = function() {
 
 			/*
 			 * Function: getRandomInt
-			 * Params: array
+			 * Params: max
 			 * Usage: Devuelve un nº que es 1 o 0.
 			 */
 			function getRandomInt(max) {
@@ -1204,7 +1166,7 @@ var game = function() {
 
 			/*
 			 * Function: comprobar
-			 * Params: array
+			 * Params: 
 			 * Usage: Comprobamos si es correcto el código
 			 */
 			function comprobar(){
@@ -1217,8 +1179,6 @@ var game = function() {
 				}
 
 				if(!flag){
-					var passed = new Q.UI.Button({x: 501, y: 175, w: 240, h: 60, scale: 0.70, asset: "passed.png"});
-					stage.insert(passed);
 					Q.stageScene("mapa4", 1);
 				}else{
 					Q.state.get("vidas");
@@ -1428,7 +1388,7 @@ var game = function() {
 		Q.scene("mainTitle", function(stage){
 			// Iniciamos las variables globales de contadores
 			Q.state.reset({ vidas: 3,  frutas: 0, level: 1});
-
+			
 			// Creamos el botón de inicio
 			var button = new Q.UI.Button({
 				x: Q.width/2,
@@ -1439,15 +1399,6 @@ var game = function() {
 				asset: "titulo.png"
 			});
 			stage.insert(button);
-
-			// PARA QUE SEA COMPATIBLE CON MOBILE
-			/*
-			addEventListener("keydown", function(){
-				Q.clearStages();
-				
-				Q.stageScene("tutorial0", 1);
-				Q.stageScene("hud", 2);
-			});*/
 
 			// Creamos el inicio
 			button.on("click", function(){
@@ -1472,6 +1423,8 @@ var game = function() {
 			var button2 = new Q.UI.Button({x: Q.width/2, y: Q.height/2, w: 605, h: 259, scale: 1, asset: "win.png"});
 			stage.insert(button2);
 
+			Q.audio.stop();
+			Q.audio.play("soundtrack_portada.mp3");
 			// Cuando se hace click se limpian los escenarios y se reinicia el juego
 			button2.on("click",function() {
 				Q.clearStages();
@@ -1479,9 +1432,6 @@ var game = function() {
 			});
 		});
 
-		//Q.debug = true;
-		//Q.debugFill = true;
-		Q.stageScene("mapa4");
-		//Q.stageScene("fruit_level");
+		Q.stageScene("mainTitle");
 	});
 }
